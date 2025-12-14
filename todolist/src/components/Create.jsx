@@ -4,8 +4,8 @@ import axios from 'axios';
 function Create() {
   const [task, setTask] = useState('');
   const handleAdd = () => {
-    axios.post('http://localhost:3001/add', { task: task })
-      .then(() => location.reload())  // Removed result
+    axios.post('/add', { task: task })
+      .then(() => window.location.reload())
       .catch(err => console.log(err));
   }
   return (

@@ -1,13 +1,19 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const path = require('path')
 const TodoModel = require('./Models/Todo')
 
 const app = express()
 app.use(cors())
 app.use(express.json())
 
-mongoose.connect('mongodb://127.0.0.1:27017/TodoList')
+// Serve static files from React build
+app.use(express.static(path.join(__dirname, 'public')))
+
+// MongoDB connection with environment variable support
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/TodoList'
+mongoose.connect(MONGODB_URI)
 
 app.get('/get', (req, res) => {
     TodoModel.find()
@@ -36,6 +42,13 @@ app.post('/add', (req, res) => {
     }).then(result => res.json(result))
     .catch(err => res.json(err))
 })
-app.listen(3001, () => {
-    console.log("Server is running on port 3001")
+
+// Serve React app for any other routes
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+const PORT = process.env.PORT || 3001
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`)
 })
