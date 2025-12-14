@@ -68,7 +68,7 @@ git push -u origin main
 Add these secrets to your GitHub repository (Settings → Secrets and variables → Actions):
 
 1. **DOCKER_ACCESS_TOKEN**
-   - Value: `dckr_pat_XFiYhSiSBQ6qCplnLsLmCXfRxXc`
+   - Value: Your Docker Hub access token
    - This allows GitHub Actions to push images to Docker Hub
 
 2. **AZURE_WEBAPP_PUBLISH_PROFILE** (Get from Azure Portal)
