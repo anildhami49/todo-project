@@ -26,7 +26,7 @@ function Home() {
 
   return (
     <div>
-      <h2>Todo List</h2>
+      <h2>Add Your Task</h2>
       <Create />
       <br />
       {todos.length === 0
